@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  validates_presence_of :title, :lede, :body, :category_name
+  validates_presence_of :title, :lede, :body, :category_id
   belongs_to :category
   has_one_attached :image
   has_and_belongs_to_many :authors, class_name: 'User', join_table: 'articles_authors',
