@@ -4,8 +4,8 @@ class Article < ApplicationRecord
   has_one_attached :image
   has_and_belongs_to_many :authors, class_name: 'User', join_table: 'articles_authors',
                                     association_foreign_key: 'author_id'
-  validates :image, attached: true,
-                    content_type: ['image/png', 'image/jpg']
+  # validates :image, attached: true,
+  #                   content_type: ['image/png', 'image/jpg']
 
   def self.get_published_articles(category_name)
     articles_published = Article.where(published: true)

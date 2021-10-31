@@ -111,39 +111,4 @@ RSpec.describe 'POST /api/articles', type: :request do
       end
     end
   end
-
-  describe 'Unsuccessful, when an article without image passed in' do
-    before do
-      post '/api/articles',
-           params: { article: { title: 'Amazing title',
-                                lede: 'Amazing lede...',
-                                body: 'Amazing body',
-                                author_ids: [],
-                                category_name: category.name,
-                                published: true } },
-           headers: credentials
-    end
-
-    it 'is expected to return a successful response message when image is not passed in' do
-      expect(response_json['errors']).to eq "Image can't be blank"
-    end
-  end
-
-  describe 'unsuccessful, when the API is unable to process the image' do
-    before do
-      post '/api/articles',
-           params: { article: { title: 'Amazing title',
-                                lede: 'Amazing lede...',
-                                body: 'Amazing body',
-                                author_ids: [],
-                                category_name: category.name,
-                                image: 'useless nonsense',
-                                published: true } },
-           headers: credentials
-    end
-
-    it 'is expected to return an error message when an image that cannot be processed is passed in' do
-      expect(response_json['errors']).to eq "Image can't be blank"
-    end
-  end
 end
