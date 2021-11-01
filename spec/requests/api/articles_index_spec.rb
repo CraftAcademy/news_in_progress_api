@@ -2,7 +2,7 @@ RSpec.describe 'GET /api/articles', type: :request do
   subject { response }
 
   describe 'when there are some article in the database' do
-    let(:journalist) { create(:journalist) }
+    let(:journalist) { create(:journalist, name: 'Bob Woodward') }
     let(:category) { create(:category, name: 'Tech') }
     let!(:article_1) { create(:article, category_id: category.id, category_name: category.name) }
     let!(:article_2) { create(:article, category_id: category.id, category_name: category.name) }
