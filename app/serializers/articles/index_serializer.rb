@@ -1,6 +1,6 @@
 class Articles::IndexSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :lede, :updated_at, :published, :image
+  attributes :id, :title, :lede, :updated_at, :published, :image, :authors_as_sentence
 
   belongs_to :category, serializer: Categories::IndexSerializer
   has_many :authors, serializer: Users::AuthorsIndexSerializer
@@ -11,5 +11,9 @@ class Articles::IndexSerializer < ActiveModel::Serializer
     else
       object.image.service_url(expires_in: 30.minutes)
     end
+  end
+
+  def authors_as_sentence
+    object.authors.pluck(:name).to_sentence
   end
 end
