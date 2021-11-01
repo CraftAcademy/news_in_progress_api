@@ -15,7 +15,7 @@ describe Articles::IndexSerializer, type: :serializer do
   end
 
   it 'is expected to contain relevant keys' do
-    expected_keys = %w[id title lede updated_at published category authors]
+    expected_keys = %w[id title lede updated_at published image category authors]
     expect(subject['articles'].last.keys).to match expected_keys
   end
 
