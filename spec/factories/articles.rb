@@ -4,7 +4,6 @@ FactoryBot.define do
     lede { 'MyLede' }
     body { 'MyBody' }
     category
-    category_id { category.id }
     published { true }
 
     after(:build) do |article|
