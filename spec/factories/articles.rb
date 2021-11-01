@@ -5,7 +5,6 @@ FactoryBot.define do
     body { 'MyBody' }
     category
     category_id { category.id }
-    category_name { category.name }
     published { true }
 
     after(:build) do |article|
