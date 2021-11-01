@@ -107,7 +107,7 @@ RSpec.describe 'POST /api/articles', type: :request do
       it { is_expected.to have_http_status 422 }
 
       it 'is expected to return an error when the category is missing' do
-        expect(response_json['errors']).to eq("Category name can't be blank and Category must exist")
+        expect(response_json['errors']).to eq("Category must exist")
       end
     end
   end
