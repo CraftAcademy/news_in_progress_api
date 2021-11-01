@@ -31,7 +31,6 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
 
       it 'is expected to return an image with the article' do
-        binding.pry
         expect(response_json['articles'].last).to include 'image'
       end
       
