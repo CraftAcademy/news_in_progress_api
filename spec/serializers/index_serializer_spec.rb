@@ -15,12 +15,12 @@ describe Articles::IndexSerializer, type: :serializer do
   end
 
   it 'is expected to contain relevant keys' do
-    expected_keys = %w[id title lede updated_at published category authors]
+    expected_keys = %w[id title lede updated_at published image category authors]
     expect(subject['articles'].last.keys).to match expected_keys
   end
 
   it 'is expected to have a specific structure' do
-    expect(subject["articles"].last).to match(
+    expect(subject['articles'].last).to match(
       {
         'id' => an_instance_of(Integer),
         'title' => an_instance_of(String),
@@ -32,7 +32,8 @@ describe Articles::IndexSerializer, type: :serializer do
           'id' => an_instance_of(Integer),
           'name' => an_instance_of(String)
         },
-        'authors' => an_instance_of(Array)
+        'authors' => an_instance_of(Array),
+        'image' => an_instance_of(String)
       }
     )
   end
