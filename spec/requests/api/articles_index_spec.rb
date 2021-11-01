@@ -27,7 +27,6 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
 
       it 'is expected to return the author of the article' do
-        binding.pry
         expect(response_json['articles'].last['authors_as_sentence']).to eq journalist.name
       end
     end
