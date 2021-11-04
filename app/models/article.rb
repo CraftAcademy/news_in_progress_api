@@ -7,10 +7,10 @@ class Article < ApplicationRecord
   validates :image, attached: true,
                     content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
-  def self.get_published_articles(category_name)
+  def self.get_published_articles(category)
     articles_published = Article.where(published: true)
-    if Category.pluck(:name).include? category_name
-      articles_published.where(category_name: category_name)
+    if Category.pluck(:name).include? category
+      articles_published.where(category['name'] == category)
     else
       articles_published
     end

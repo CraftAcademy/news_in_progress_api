@@ -10,7 +10,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: category.name,
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                 published: true } },
            headers: credentials
@@ -37,7 +37,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { lede: "I'm missing a title",
                                   body: "I'm missing a title",
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: category.name,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -58,7 +58,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { title: 'I forgot the lede',
                                   body: 'I forgot the lede',
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: category.name,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -79,7 +79,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { title: 'I forgot the body',
                                   lede: 'I forgot the body',
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: category.name,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -107,7 +107,7 @@ RSpec.describe 'POST /api/articles', type: :request do
       it { is_expected.to have_http_status 422 }
 
       it 'is expected to return an error when the category is missing' do
-        expect(response_json['errors']).to eq("Category must exist")
+        expect(response_json['errors']).to eq('Category must exist')
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: category.name,
                                 published: true } },
            headers: credentials
     end
@@ -136,7 +136,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: category.name,
                                 image: 'useless nonsense',
                                 published: true } },
            headers: credentials
