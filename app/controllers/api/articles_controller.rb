@@ -3,6 +3,7 @@ class Api::ArticlesController < ApplicationController
   def index
     articles = Article.get_published_articles(params[:category])
     if articles.any?
+      binding.pry
       render json: articles, each_serializer: Articles::IndexSerializer
     else
       render json: { message: 'There are no articles in the database' }, status: 404
