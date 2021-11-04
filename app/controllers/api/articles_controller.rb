@@ -11,8 +11,7 @@ class Api::ArticlesController < ApplicationController
 
   def create
     article = authorize Article.new(article_params.merge(author_ids: [current_user.id] + params[:article][:author_ids]))
-
-    article.category = Category.find_by(name: article.category)
+    article.category = Category.find_by(name: params[:article][:category])
     Article.attach_image(article, params)
     article.save
 
@@ -31,6 +30,6 @@ class Api::ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :lede, :body, :category, :published, author_ids: [])
+    params.require(:article).permit(:title, :lede, :body, :published, author_ids: [])
   end
 end

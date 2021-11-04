@@ -10,7 +10,7 @@ class Article < ApplicationRecord
   def self.get_published_articles(category)
     articles_published = Article.where(published: true)
     if Category.pluck(:name).include? category
-      articles_published.joins(:category).where(category: {name: category})
+      articles_published.joins(:category).where(category: { name: category })
     else
       articles_published
     end
@@ -25,7 +25,6 @@ class Article < ApplicationRecord
       io << decoded_data
       io.rewind
       article.image.attach(io: io, filename: "#{article.title}.#{image[:extension]}", content_type: image[:type])
-
     end
   end
 
