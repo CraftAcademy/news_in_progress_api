@@ -39,4 +39,8 @@ class Article < ApplicationRecord
       object
     end
   end
+
+  def authors_as_sentence
+    authors.pluck(:name).to_sentence
+  end
 end

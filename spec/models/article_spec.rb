@@ -44,7 +44,7 @@ RSpec.describe Article, type: :model do
 
       it { is_expected.to respond_to(:authors_as_sentence) }
 
-      it 'has some behaviour' do
+      it 'is expected to return all authors as a sentence' do
         expect(subject.authors_as_sentence).to eq 'John Doe and Jane Doe'
       end
     end
