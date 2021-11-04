@@ -10,7 +10,7 @@ class Article < ApplicationRecord
   def self.get_published_articles(category)
     articles_published = Article.where(published: true)
     if Category.pluck(:name).include? category
-      articles_published.where(category['name'] == category)
+      articles_published.joins(:category).where(category: {name: category})
     else
       articles_published
     end
