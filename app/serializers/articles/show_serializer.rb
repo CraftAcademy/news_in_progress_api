@@ -12,8 +12,4 @@ class Articles::ShowSerializer < ActiveModel::Serializer
       object.image.service_url(expires_in: 30.minutes)
     end
   end
-
-  def authors_as_sentence
-    object.authors.pluck(:name).to_sentence
-  end
 end

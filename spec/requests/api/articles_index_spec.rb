@@ -33,6 +33,10 @@ RSpec.describe 'GET /api/articles', type: :request do
       it 'is expected to return the author of the article as a sentence' do
         expect(response_json['articles'].last['authors_as_sentence']).to eq journalist.name
       end
+
+      it 'is expected to return an boolean for a top story' do
+        expect(response_json['articles'].last['top_story']).to eq false
+      end
       
 
       it 'is expected to return an image with the article' do
