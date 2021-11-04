@@ -30,6 +30,11 @@ describe 'GET api/articles/:id', type: :request do
       expect(response_json['article']['authors'].last['name']).to eq journalist.name
     end
 
+    it 'is expected to return the author of the article as a sentence' do
+      expect(response_json['article']['authors_as_sentence']).to eq journalist.name
+    end
+    
+
     it 'is expected to return an image with the article' do
       expect(response_json['article']).to include 'image'
     end

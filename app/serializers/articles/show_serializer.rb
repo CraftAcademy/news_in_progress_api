@@ -1,6 +1,6 @@
 class Articles::ShowSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :lede, :body, :updated_at, :image
+  attributes :id, :title, :lede, :body, :updated_at, :image, :authors_as_sentence
 
   belongs_to :category, serializer: Categories::IndexSerializer
   has_many :authors, serializer: Users::AuthorsIndexSerializer
