@@ -13,7 +13,7 @@ class Articles::IndexSerializer < ActiveModel::Serializer
     end
   end
 
-  def authors_as_sentence
-    object.authors.pluck(:name).to_sentence
-  end
+  # def authors_as_sentence
+  #   object.authors.pluck(:name).to_sentence
+  # end
 end

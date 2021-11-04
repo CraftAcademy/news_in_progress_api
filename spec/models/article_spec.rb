@@ -35,4 +35,18 @@ RSpec.describe Article, type: :model do
       expect(subject.image).to be_attached
     end
   end
+
+  describe 'instance methods' do
+    describe '#authors_as_sentence' do
+      subject { create(:article, authors: [author_1, author_2]) }
+      let(:author_1) { create(:journalist, name: 'John Doe') }
+      let(:author_2) { create(:journalist, name: 'Jane Doe') }
+
+      it { is_expected.to respond_to(:authors_as_sentence) }
+
+      it 'has some behaviour' do
+        expect(subject.authors_as_sentence).to eq 'John Doe and Jane Doe'
+      end
+    end
+  end
 end
