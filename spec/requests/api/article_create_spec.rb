@@ -2,7 +2,7 @@ RSpec.describe 'POST /api/articles', type: :request do
   subject { response }
   let(:user) { create(:journalist) }
   let(:credentials) { user.create_new_auth_token }
-  let(:category) { create(:category) }
+  # let(:category) { create(:category) }
   describe 'successful, when the article is created' do
     before do
       post '/api/articles',
@@ -10,7 +10,16 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category: category.name,
+                                category: "Tech", #When creating an article on the admin portal the info we send off about the category is just the name
+                                                  #like this {category: "Tech"} for example, so using an object (like the category created on line 5) 
+                                                  #here doesnt give a true representation of what happens. This was fine when we were using category_name
+                                                  #as on line 16 we would take the category string from params and match it to the Category instance. But 
+                                                  #because we removed category_name this no longer worked.
+                                                  #Now because we have :category in our article params instead, the controller wants an actual Category to
+                                                  #be able to run line 14 and do Article.new.
+                                                  #I did a new migration that removed the category_name column from the schema, so just delete that if you 
+                                                  #want to see it run with category_name. I think all youd have to change would be category => category_name#
+                                                  # here on line 13, and line 15 & 34 on the article_controller.
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                 published: true } },
            headers: credentials
@@ -37,7 +46,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { lede: "I'm missing a title",
                                   body: "I'm missing a title",
                                   author_ids: [],
-                                  category: category.name,
+                                  category: category,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -58,7 +67,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { title: 'I forgot the lede',
                                   body: 'I forgot the lede',
                                   author_ids: [],
-                                  category: category.name,
+                                  category: category,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -79,7 +88,7 @@ RSpec.describe 'POST /api/articles', type: :request do
              params: { article: { title: 'I forgot the body',
                                   lede: 'I forgot the body',
                                   author_ids: [],
-                                  category: category.name,
+                                  category: category,
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -119,7 +128,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category: category.name,
+                                category: category,
                                 published: true } },
            headers: credentials
     end
@@ -136,7 +145,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category: category.name,
+                                category: category,
                                 image: 'useless nonsense',
                                 published: true } },
            headers: credentials

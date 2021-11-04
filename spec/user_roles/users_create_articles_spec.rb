@@ -9,7 +9,7 @@ RSpec.describe 'POST /api/articles', type: :request do
                               lede: 'Amazing lede...',
                               body: 'Amazing body',
                               author_ids: [],
-                              category: category.name,
+                              category: category,
                               image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                               published: true } },
          headers: credentials
