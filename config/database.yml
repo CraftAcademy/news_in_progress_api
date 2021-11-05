@@ -6,12 +6,12 @@ default: &default
 
 development:
   <<: *default
-  # username: postgres
+  username: postgres
   database: news_in_progress_api_development
 
 test:
   <<: *default
-  # username: postgres
+  username: postgres
   database: news_in_progress_api_test
 
 production:
