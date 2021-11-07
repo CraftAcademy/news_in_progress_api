@@ -14,6 +14,7 @@ gem 'pundit'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'stripe-rails', '~> 2.3', '>= 2.3.2'
 gem 'active_storage_validations', '~> 0.9.5'
+gem 'aws-sdk-s3'
 
 
 group :development, :test do
