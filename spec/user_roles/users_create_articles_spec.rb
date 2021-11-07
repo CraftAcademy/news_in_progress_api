@@ -1,15 +1,16 @@
 RSpec.describe 'POST /api/articles', type: :request do
   subject { response }
-  let(:category) { create(:category) }
+  let(:category) { create(:category, name: 'Tech') }
   let(:credentials) { user.create_new_auth_token }
 
   before do
+    category.save
     post '/api/articles',
          params: { article: { title: 'Amazing title',
                               lede: 'Amazing lede...',
                               body: 'Amazing body',
                               author_ids: [],
-                              category_name: category.name,
+                              category: 'Tech',
                               image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                               published: true } },
          headers: credentials

@@ -4,8 +4,8 @@ RSpec.describe 'GET /api/articles', type: :request do
   describe 'when there are some article in the database' do
     let(:journalist) { create(:journalist, name: 'Bob Woodward') }
     let(:category) { create(:category, name: 'Tech') }
-    let!(:article_1) { create(:article, category_id: category.id, category_name: category.name) }
-    let!(:article_2) { create(:article, category_id: category.id, category_name: category.name) }
+    let!(:article_1) { create(:article, category: category) }
+    let!(:article_2) { create(:article, category: category) }
     let!(:article_3) { create(:article, authors: [journalist]) }
 
     describe 'searching for all articles' do
@@ -27,30 +27,30 @@ RSpec.describe 'GET /api/articles', type: :request do
       end
 
       it 'is expected to return the author of the article' do
-        expect(response_json['articles'].last['authors'].last['name']).to eq journalist.name
+        expect(response_json['articles'].last['authors'].last['name']).to eq 'Bob Woodward'
       end
 
       it 'is expected to return the author of the article as a sentence' do
-        expect(response_json['articles'].last['authors_as_sentence']).to eq journalist.name
+        expect(response_json['articles'].last['authors_as_sentence']).to eq 'Bob Woodward'
       end
 
       it 'is expected to return an boolean for a top story' do
         expect(response_json['articles'].last['top_story']).to eq false
       end
-      
 
       it 'is expected to return an image with the article' do
         expect(response_json['articles'].last).to include 'image'
       end
-      
     end
 
     describe 'search for articles by categories' do
       before do
         get '/api/articles/',
-            params: { category_name: category.name }
+            params: { category: 'Tech' }
       end
-      it { is_expected.to have_http_status 200 }
+      it {
+        is_expected.to have_http_status 200
+      }
 
       it 'is expected to return a collection of articles' do
         expect(response_json['articles'].count).to eq 2
@@ -60,7 +60,7 @@ RSpec.describe 'GET /api/articles', type: :request do
     describe 'when the category params dont exist' do
       before do
         get '/api/articles/',
-            params: { category_name: 'Sports' }
+            params: { category: 'Sports' }
       end
 
       it 'is expected to return a collection of articles' do

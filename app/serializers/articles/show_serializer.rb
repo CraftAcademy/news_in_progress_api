@@ -6,10 +6,10 @@ class Articles::ShowSerializer < ActiveModel::Serializer
   has_many :authors, serializer: Users::AuthorsIndexSerializer
 
   def image
-    if Rails.env.test?
-      rails_blob_path(object.image, only_path: true)
-    else
-      object.image.service_url(expires_in: 30.minutes)
-    end
+    # if Rails.env.test?
+    rails_blob_path(object.image, only_path: true)
+    # else
+    #   object.image.service_url(expires_in: 30.minutes)
+    # end
   end
 end

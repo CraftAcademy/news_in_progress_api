@@ -2,15 +2,16 @@ RSpec.describe 'POST /api/articles', type: :request do
   subject { response }
   let(:user) { create(:journalist) }
   let(:credentials) { user.create_new_auth_token }
-  let(:category) { create(:category) }
-  describe 'successful, when the article is created' do
+  let(:category) { create(:category, name: 'Tech') }
+    describe 'successful, when the article is created' do
     before do
+      category.save
       post '/api/articles',
            params: { article: { title: 'Amazing title',
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: 'Tech',
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                 published: true } },
            headers: credentials
@@ -33,11 +34,12 @@ RSpec.describe 'POST /api/articles', type: :request do
   describe 'unsuccessful, when the article is not created' do
     describe 'because the title is missing' do
       before do
+        category.save
         post '/api/articles',
              params: { article: { lede: "I'm missing a title",
                                   body: "I'm missing a title",
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: 'Tech',
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -54,11 +56,12 @@ RSpec.describe 'POST /api/articles', type: :request do
 
     describe 'because the lede is missing' do
       before do
+        category.save
         post '/api/articles',
              params: { article: { title: 'I forgot the lede',
                                   body: 'I forgot the lede',
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: 'Tech',
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -75,11 +78,12 @@ RSpec.describe 'POST /api/articles', type: :request do
 
     describe 'because the body is missing' do
       before do
+        category.save
         post '/api/articles',
              params: { article: { title: 'I forgot the body',
                                   lede: 'I forgot the body',
                                   author_ids: [],
-                                  category_name: category.name,
+                                  category: 'Tech',
                                   image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeAAAAGSCAMAAAAM4OJtAAAABGdBTUEAALGPC',
                                   published: false } },
              headers: credentials
@@ -94,6 +98,7 @@ RSpec.describe 'POST /api/articles', type: :request do
 
     describe 'because the category is missing' do
       before do
+        category.save
         post '/api/articles',
              params: { article: { title: 'I forgot the category',
                                   lede: 'I forgot the category',
@@ -107,19 +112,20 @@ RSpec.describe 'POST /api/articles', type: :request do
       it { is_expected.to have_http_status 422 }
 
       it 'is expected to return an error when the category is missing' do
-        expect(response_json['errors']).to eq("Category must exist")
+        expect(response_json['errors']).to eq('Category must exist')
       end
     end
   end
 
   describe 'Unsuccessful, when an article without image passed in' do
     before do
+      category.save
       post '/api/articles',
            params: { article: { title: 'Amazing title',
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: 'Tech',
                                 published: true } },
            headers: credentials
     end
@@ -131,12 +137,13 @@ RSpec.describe 'POST /api/articles', type: :request do
 
   describe 'unsuccessful, when the API is unable to process the image' do
     before do
+      category.save
       post '/api/articles',
            params: { article: { title: 'Amazing title',
                                 lede: 'Amazing lede...',
                                 body: 'Amazing body',
                                 author_ids: [],
-                                category_name: category.name,
+                                category: 'Tech',
                                 image: 'useless nonsense',
                                 published: true } },
            headers: credentials
