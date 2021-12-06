@@ -6,7 +6,7 @@ article = Article.find_or_initialize_by(title: "Pablo Escobar: Colombia sterilis
                                         top_story: false)
 article.category = Category.find_by(name: 'World News')
 article.authors =  [User.find_by(name: 'Roger Harrabin')]
-file = open('https://ichef.bbci.co.uk/news/976/cpsprodpb/180C1/production/_121079489_gettyimages-1228500670-1.jpg')
+file = URI.open('https://ichef.bbci.co.uk/news/976/cpsprodpb/180C1/production/_121079489_gettyimages-1228500670-1.jpg')
 article.image.attach(io: file, filename: 'hippos.jpg')
 article.save
 
@@ -17,7 +17,7 @@ article = Article.find_or_initialize_by(title: 'Net zero announcement: UK sets o
                                         top_story: false)
 article.category = Category.find_by(name: 'Science')
 article.authors =  [User.find_by(name: 'Roger Harrabin')]
-file = open('https://ichef.bbci.co.uk/news/976/cpsprodpb/D90B/production/_121136555_gettyimages-137720371.jpg')
+file = URI.open('https://ichef.bbci.co.uk/news/976/cpsprodpb/D90B/production/_121136555_gettyimages-137720371.jpg')
 article.image.attach(io: file, filename: 'greenhouse.jpg')
 article.save
 
@@ -28,7 +28,7 @@ article = Article.find_or_initialize_by(title: 'Sweden launches bid to become wo
                                         top_story: false)
 article.category = Category.find_by(name: 'Culture')
 article.authors = [User.find_by(name: 'Emily Anthes')]
-file = open('https://www.thelocal.se/wp-content/uploads/2021/10/sdl93stTt4xvTI-nh-640x431.jpg')
+file = URI.open('https://www.thelocal.se/wp-content/uploads/2021/10/sdl93stTt4xvTI-nh-640x431.jpg')
 article.image.attach(io: file, filename: 'sweden.jpg')
 article.save
 
@@ -39,7 +39,7 @@ article = Article.find_or_initialize_by(title: 'How to Map a Fly Brain in 20 Mil
                                         top_story: false)
 article.category = Category.find_by(name: 'Science')
 article.authors = [User.find_by(name: 'Becky Waterton')]
-file = open('https://static01.nyt.com/images/2021/10/26/science/25SCI-FLYBRAIN1/25SCI-FLYBRAIN1-superJumbo.jpg')
+file = URI.open('https://static01.nyt.com/images/2021/10/26/science/25SCI-FLYBRAIN1/25SCI-FLYBRAIN1-superJumbo.jpg')
 article.image.attach(io: file, filename: 'fly.jpg')
 article.save
 
@@ -50,7 +50,7 @@ article = Article.find_or_initialize_by(title: 'How to deal with seasonal affect
                                         top_story: false)
 article.category = Category.find_by(name: 'Culture')
 article.authors = [User.find_by(name: 'Pascale Hughes')]
-file = open('https://i.inews.co.uk/content/uploads/2021/10/PRI_207058972-640x360.jpg')
+file = URI.open('https://i.inews.co.uk/content/uploads/2021/10/PRI_207058972-640x360.jpg')
 article.image.attach(io: file, filename: 'sunshine.jpg')
 article.save
 
@@ -61,7 +61,7 @@ article = Article.find_or_initialize_by(title: 'How the pandemic has changed the
                                         top_story: true)
 article.category = Category.find_by(name: 'Tech')
 article.authors = [User.find_by(name: 'Emily Anthes')]
-file = open('https://www.economist.com/img/b/1000/563/90/sites/default/files/images/print-edition/20211030_WBD002_0.jpg')
+file = URI.open('https://www.economist.com/img/b/1000/563/90/sites/default/files/images/print-edition/20211030_WBD002_0.jpg')
 article.image.attach(io: file, filename: 'weather.jpg')
 article.save
 
@@ -72,7 +72,7 @@ article = Article.find_or_initialize_by(title: 'T20 World Cup: England thrash Au
                                         top_story: false)
 article.category = Category.find_by(name: 'Sports')
 article.authors = [User.find_by(name: 'Matthew Henry')]
-file = open('https://i.dailymail.co.uk/1s/2021/10/31/08/49856365-0-image-a-6_1635668561076.jpg')
+file = URI.open('https://i.dailymail.co.uk/1s/2021/10/31/08/49856365-0-image-a-6_1635668561076.jpg')
 article.image.attach(io: file, filename: 'cricket.jpg')
 article.save
 
@@ -83,7 +83,7 @@ article = Article.find_or_initialize_by(title: 'Wales 16-54 New Zealand: All Bla
                                         top_story: false)
 article.category = Category.find_by(name: 'Sports')
 article.authors = [User.find_by(name: 'Matthew Henry')]
-file = open('https://ichef.bbci.co.uk/onesport/cps/800/cpsprodpb/C285/production/_121279794_cdf_301021_ge_wales_v_new_zealand_019.jpg')
+file = URI.open('https://ichef.bbci.co.uk/onesport/cps/800/cpsprodpb/C285/production/_121279794_cdf_301021_ge_wales_v_new_zealand_019.jpg')
 article.image.attach(io: file, filename: 'rugby.jpg')
 article.save
 
@@ -94,6 +94,6 @@ article = Article.find_or_initialize_by(title: 'The Brics never lived up to thei
                                         top_story: false)
 article.category = Category.find_by(name: 'Business')
 article.authors = [User.find_by(name: 'Max King')]
-file = open('https://media.moneyweek.com/image/private/s--0p_c0Vve--/f_auto,t_primary-image-desktop@1/v1634547618/editorial/2021/211018-brics.png')
+file = URI.open('https://media.moneyweek.com/image/private/s--0p_c0Vve--/f_auto,t_primary-image-desktop@1/v1634547618/editorial/2021/211018-brics.png')
 article.image.attach(io: file, filename: 'emerging_markets.jpg')
 article.save
